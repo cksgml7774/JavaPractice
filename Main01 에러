@@ -1,0 +1,21 @@
+2021-05-09 03:30:16 [DEBUG] org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.log4j2.Log4j2Impl' adapter.
+2021-05-09 03:30:16 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - PooledDataSource forcefully closed/removed all connections.
+2021-05-09 03:30:16 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - PooledDataSource forcefully closed/removed all connections.
+2021-05-09 03:30:16 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - PooledDataSource forcefully closed/removed all connections.
+2021-05-09 03:30:16 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - PooledDataSource forcefully closed/removed all connections.
+2021-05-09 03:30:16 [DEBUG] org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+2021-05-09 03:30:17 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - Created connection 1998882269.
+2021-05-09 03:30:17 [DEBUG] org.apache.ibatis.transaction.jdbc.JdbcTransaction - Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@772485dd]
+2021-05-09 03:30:17 [DEBUG] UsersMapper.join - ==>  Preparing: INSERT INTO users (realname, username, password, email, gender, DATE_FORMAT(birthdate, '%Y-%m-%d'), tel, postcode, addr1, addr2, is_admin, DATE_FORMAT(reg_date, '%Y-%m-%d'), DATE_FORMAT(edit_date, '%Y-%m-%d')) VALUES (?, ?, md5?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); 
+2021-05-09 03:30:18 [DEBUG] UsersMapper.join - ==> Parameters: 박찬희(String), 돈다발(String), 123(String), cksgml7774@gmail.com(String), M(String), 950127(String), 0101234567(String), 12345(String), 서울(String), 금천구(String), Y(String), 2021-04-25(String), 2021-05-09(String)
+2021-05-09 03:30:18 [ERROR] Main01 - 데이터 저장에 실패했습니다.
+### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(birthdate, '%Y-%m-%d'), tel, postcode, addr1, addr2, is_admin, DATE_FORMAT(reg_' at line 1
+### The error may exist in study/java/Helloworld/mapper/UsersMapper.xml
+### The error may involve UsersMapper.join-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO users (realname, username, password, email, gender, DATE_FORMAT(birthdate, '%Y-%m-%d'), tel, postcode, addr1, addr2, is_admin, DATE_FORMAT(reg_date, '%Y-%m-%d'), DATE_FORMAT(edit_date, '%Y-%m-%d')) VALUES (?, ?, md5?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+### Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(birthdate, '%Y-%m-%d'), tel, postcode, addr1, addr2, is_admin, DATE_FORMAT(reg_' at line 1
+2021-05-09 03:30:18 [DEBUG] org.apache.ibatis.transaction.jdbc.JdbcTransaction - Rolling back JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@772485dd]
+2021-05-09 03:30:18 [DEBUG] org.apache.ibatis.transaction.jdbc.JdbcTransaction - Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@772485dd]
+2021-05-09 03:30:18 [DEBUG] org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@772485dd]
+2021-05-09 03:30:18 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - Returned connection 1998882269 to pool.
