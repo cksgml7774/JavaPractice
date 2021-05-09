@@ -1,0 +1,20 @@
+2021-05-09 22:48:22 [DEBUG] org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.log4j2.Log4j2Impl' adapter.
+2021-05-09 22:48:22 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - PooledDataSource forcefully closed/removed all connections.
+2021-05-09 22:48:22 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - PooledDataSource forcefully closed/removed all connections.
+2021-05-09 22:48:22 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - PooledDataSource forcefully closed/removed all connections.
+2021-05-09 22:48:22 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - PooledDataSource forcefully closed/removed all connections.
+2021-05-09 22:48:22 [DEBUG] org.apache.ibatis.transaction.jdbc.JdbcTransaction - Opening JDBC Connection
+2021-05-09 22:48:23 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - Created connection 1998882269.
+2021-05-09 22:48:23 [DEBUG] org.apache.ibatis.transaction.jdbc.JdbcTransaction - Setting autocommit to false on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@772485dd]
+2021-05-09 22:48:23 [DEBUG] UsersMapper.editUserInfo - ==>  Preparing: UPDATE users SET realname=?, username=?, password=md5({#password}), email=?, gender=?, birthdate=?, tel=?, postcode=?,addr1=?, addr2=?, is_admin=?, reg_date=?, edit_date=? WHERE id=?; 
+2021-05-09 22:48:24 [ERROR] Main04 - 데이터 수정에 실패했습니다.
+### Error updating database.  Cause: org.apache.ibatis.type.TypeException: Could not set parameters for mapping: ParameterMapping{property='gender', mode=IN, javaType=class java.lang.String, jdbcType=null, numericScale=null, resultMapId='null', jdbcTypeName='null', expression='null'}. Cause: org.apache.ibatis.type.TypeException: Error setting non null for parameter #4 with JdbcType null . Try setting a different JdbcType for this parameter or a different configuration property. Cause: java.sql.SQLException: Parameter index out of range (4 > number of parameters, which is 3).
+### The error may exist in study/java/Helloworld/mapper/UsersMapper.xml
+### The error may involve UsersMapper.editUserInfo-Inline
+### The error occurred while setting parameters
+### SQL: UPDATE users SET realname=?, username=?, password=md5({#password}), email=?, gender=?, birthdate=?, tel=?, postcode=?,addr1=?, addr2=?, is_admin=?, reg_date=?, edit_date=?    WHERE id=?;
+### Cause: org.apache.ibatis.type.TypeException: Could not set parameters for mapping: ParameterMapping{property='gender', mode=IN, javaType=class java.lang.String, jdbcType=null, numericScale=null, resultMapId='null', jdbcTypeName='null', expression='null'}. Cause: org.apache.ibatis.type.TypeException: Error setting non null for parameter #4 with JdbcType null . Try setting a different JdbcType for this parameter or a different configuration property. Cause: java.sql.SQLException: Parameter index out of range (4 > number of parameters, which is 3).
+2021-05-09 22:48:24 [DEBUG] org.apache.ibatis.transaction.jdbc.JdbcTransaction - Rolling back JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@772485dd]
+2021-05-09 22:48:24 [DEBUG] org.apache.ibatis.transaction.jdbc.JdbcTransaction - Resetting autocommit to true on JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@772485dd]
+2021-05-09 22:48:24 [DEBUG] org.apache.ibatis.transaction.jdbc.JdbcTransaction - Closing JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@772485dd]
+2021-05-09 22:48:24 [DEBUG] org.apache.ibatis.datasource.pooled.PooledDataSource - Returned connection 1998882269 to pool.
