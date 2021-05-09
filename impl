@@ -1,0 +1,103 @@
+package study.java.Helloworld.serviceImpl;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import study.java.Helloworld.model.Users;
+import study.java.Helloworld.service.UsersService;
+
+public class UsersServiceImpl implements UsersService {
+
+	/** MyBatis */
+	// --> import org.apache.ibatis.session.SqlSession
+	private SqlSession sqlSession;
+
+	/** 생성자, sqlSession을 전달 받는다. */
+	public UsersServiceImpl(SqlSession sqlSession) {
+		super();
+		this.sqlSession = sqlSession;
+	}
+
+	// 회원가입
+	// 입력값을 DB에 저장하고 비밀번호 암호화 필수
+	@Override
+	public Users join(Users users) throws NullPointerException, Exception {
+		int row_count = sqlSession.insert("UsersMapper.join", users);
+
+		// 저장된 데이터의 행 수가 없을 겨우 강제로 예외를 발생시킨다.
+		if (row_count == 0) {
+			throw new NullPointerException();
+		}
+
+		return sqlSession.selectOne("UsersMapper.getUserInfo", users);
+
+	}
+
+	// 로그인
+	// 아이디와 비밀번호가 일치하는 데이터를 조회한다
+	@Override
+	public Users login(Users users) throws NullPointerException, Exception {
+		Users item = sqlSession.selectOne("UsersMapper.login", users);
+
+		if (item == null) {
+			throw new NullPointerException();
+		}
+
+		return sqlSession.selectOne("UsersMapper.getUserInfo", users);
+	}
+
+	// 회원정보 조회
+	// 회원 일련 번호가 일치하는 데이터 조회
+	@Override
+	public Users getUserInfo(Users users) throws NullPointerException, Exception {
+		Users item = sqlSession.selectOne("UsersMapper.getUserInfo", users);
+
+		if (item == null) {
+			throw new NullPointerException();
+		}
+
+		return sqlSession.selectOne("UsersMapper.getUserInfo", users);
+	}
+
+	// 회원정보 수정
+	// 회원 일련 번호가 일치하는 데이터 수정
+	@Override
+	public Users editUserInfo(Users users) throws NullPointerException, Exception {
+		int row_count = sqlSession.update("UsersMapper.editUserInfo", users);
+
+		if (row_count == 0) {
+			throw new NullPointerException();
+		}
+		return sqlSession.selectOne("UsersMapper.getUserInfo", users);
+
+	}
+
+	// 회원목록 조회
+	// 전체 회원 목록 조회
+	@Override
+	public List<Users> getUserList(Users users) throws Exception {
+		List<Users> list = sqlSession.selectList("UsersMapper.getUserList", users);
+
+		if (list == null) {
+			throw new NullPointerException();
+		}
+
+		return list;
+
+	}
+
+	// 회원탈퇴
+	// 회원일련번호가 일치하는 데이터 삭제
+	@Override
+	public void out(Users users) throws Exception {
+
+		int row_count = sqlSession.delete("UsersMapper.out", users);
+
+		if (row_count == 0) {
+			throw new NullPointerException();
+		}
+
+	}
+
+}
