@@ -37,7 +37,7 @@
 	    	useGeneratedKeys="true"
 	    	keyProperty="id">
 		<!-- "#{변수명}" 으로 표시된 곳에 Beans의 멤버변수가 치환된다. -->
-		INSERT INTO users (realname, username, password, email, gender, DATE_FORMAT(birthdate, '%Y-%m-%d'), tel, postcode, addr1, addr2, is_admin, DATE_FORMAT(reg_date, '%Y-%m-%d'), DATE_FORMAT(edit_date, '%Y-%m-%d')) VALUES (#{realname}, #{username}, md5#{password}, #{email}, #{gender}, #{birthdate}, #{tel}, #{postcode}, #{addr1}, #{addr2}, #{is_admin}, #{reg_date}, #{edit_date});
+		INSERT INTO users (realname, username, password, email, gender, birthdate, tel, postcode, addr1, addr2, is_admin, reg_date, edit_date) VALUES (#{realname}, #{username}, md5(#{password}), #{email}, #{gender}, #{birthdate}, #{tel}, #{postcode}, #{addr1}, #{addr2}, #{is_admin}, #{reg_date}, #{edit_date});
 	</insert>
 	
 	<!--
@@ -45,11 +45,14 @@
 		<select id="메서드이름에 해당하는 식별자" 
 				parameterType="파라미터의 데이터 타입(Beans의 클래스명)">
 	-->
-	<insert id="login" 
-	    	parameterType="study.java.Helloworld.model.Users">
+	<select id="login" 
+	    	parameterType="study.java.Helloworld.model.Users"
+	    	resultMap="users">
 		<!-- "#{변수명}" 으로 표시된 곳에 Beans의 멤버변수가 치환된다. -->
-		SELECT id, realname, username, password, email, gender, DATE_FORMAT(birthdate, '%Y-%m-%d'), tel, postcode, addr1, addr2, is_admin, DATE_FORMAT(reg_date,'%Y-%m-%d'), DATE_FORMAT(edit_date,'%Y-%m-%d') FROM users WHERE username=#{username}, password=#{password};
-	</insert>
+		SELECT id, realname, username, password, email, gender, birthdate, tel, postcode, addr1, 
+		addr2, is_admin, reg_date, edit_date FROM users
+		 WHERE id=#{id} AND password=md5(#{password});
+	</select>
 	
 	
 	<!--
@@ -62,7 +65,7 @@
 	    	parameterType="study.java.Helloworld.model.Users" 
 	    	resultMap="users">
 		<!-- "#{변수명}" 으로 표시된 곳에 멤버변수가 치환된다. -->
-		SELECT id, realname, username, password, email, gender, DATE_FORMAT(birthdate, '%Y-%m-%d'), tel, postcode, addr1, addr2, is_admin, DATE_FORMAT(reg_date,'%Y-%m-%d'), DATE_FORMAT(edit_date,'%Y-%m-%d') FROM users WHERE id=#{id};
+		SELECT id, realname, username, password, email, gender, birthdate, tel, postcode, addr1, addr2, is_admin, reg_date, edit_date FROM users WHERE id=#{id};
 	</select>
 
 	<!--
@@ -73,7 +76,7 @@
 	<update id="editUserInfo" 
 	    	parameterType="study.java.Helloworld.model.Users">
 		<!-- "#{변수명}" 으로 표시된 곳에 Beans의 멤버변수가 치환된다. -->
-		UPDATE users SET realname=#{realname}, username=#{username}, password={#password}, email=#{email}, gender=#{gender},brithdate=#{birthdate}, tel=#{tel}, postcode=#{postcode},addr1=#{addr1}, addr2=#{addr2}, is_admin=#{is_admin}, reg_date=#{reg_date}, edit_date#{edit_date} 
+		UPDATE users SET realname=#{realname}, username=#{username}, password=md5({#password}), email=#{email}, gender=#{gender}, birthdate=#{birthdate}, tel=#{tel}, postcode=#{postcode},addr1=#{addr1}, addr2=#{addr2}, is_admin=#{is_admin}, reg_date=#{reg_date}, edit_date=#{edit_date} 
 		WHERE id=#{id};
 	</update>
 
@@ -84,7 +87,7 @@
 	-->
 	<select id="getUserList" resultMap="users">
 		<!-- 이 안에서 처리할 SQL문을 명시한다. -->
-		SELECT id, realname, username, password, email, gender, DATE_FORMAT(birthdate, '%Y-%m-%d'), tel, postcode, addr1, addr2, is_admin, DATE_FORMAT(reg_date,'%Y-%m-%d'), DATE_FORMAT(edit_date,'%Y-%m-%d') FROM users;
+		SELECT id, realname, username, password, email, gender, birthdate, tel, postcode, addr1, addr2, is_admin, reg_date, edit_date FROM users;
 	</select>
 	
 	<!--
